@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebApplicationCourseNTier.MVC.Models; // Modeli əlavə et
+using WebApplicationCourseNTier.MVC.Models; 
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
