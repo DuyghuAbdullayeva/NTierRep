@@ -1,0 +1,30 @@
+﻿@model WebApplicationCourseNTier.Business.DTOs.GroupDTOs.UpdateGroupDto
+
+@{
+    ViewData["Title"] = "Edit Group";
+}
+
+<h1 class="text-center my-4">Edit Group</h1>
+
+<form method="post" class="form-horizontal">
+    @Html.AntiForgeryToken() 
+
+    <div class="form-group">
+        <label for="Name">Group Name</label>
+        <input type="text" id="Name" name="Name" class="form-control" value="@Model.Name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="TeacherName">Teacher Name</label>
+        <input type="text" id="TeacherName" name="TeacherName" class="form-control" value="@Model.TeacherName" required />
+    </div>
+
+    <div class="form-group">
+        <label for="SubjectName">Subject Name</label>
+        <input type="text" id="SubjectName" name="SubjectName" class="form-control" value="@Model.SubjectName" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Group</button>
+</form>
+
+<a href="@Url.Action("All", "Group")" class="btn btn-secondary mt-3">Back to Groups</a>

@@ -1,0 +1,32 @@
+﻿@model WebApplicationCourseNTier.Business.DTOs.GroupDTOs.PostGroupDto
+
+@{
+    ViewData["Title"] = "Create Group";
+}
+
+<div class="container">
+    <h2>Create New Group</h2>
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken() 
+
+        <div class="form-group">
+            <label for="Name">Group Name</label>
+            <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+        </div>
+
+        <div class="form-group">
+            <label for="TeacherName">Teacher Name</label>
+            <input type="text" class="form-control" id="TeacherName" name="TeacherName" value="@Model.TeacherName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="SubjectName">Subject Name</label>
+            <input type="text" class="form-control" id="SubjectName" name="SubjectName" value="@Model.SubjectName" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Group</button>
+    </form>
+
+    <a href="@Url.Action("All")" class="btn btn-secondary mt-2">Back to Groups</a>
+</div>

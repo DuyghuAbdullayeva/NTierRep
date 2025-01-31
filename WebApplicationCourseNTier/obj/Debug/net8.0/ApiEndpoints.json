@@ -1,0 +1,912 @@
+[
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.GroupController",
+    "Method": "GetAllGroupsAsync",
+    "RelativePath": "api/group",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.DataAccess.Models.PaginationResponse\u00601[[WebApplicationCourseNTier.Business.DTOs.GroupDTOs.GetGroupDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], WebApplicationCourseNTier.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.GroupController",
+    "Method": "CreateGroupAsync",
+    "RelativePath": "api/group",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "groupDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.GroupDTOs.PostGroupDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.GroupDTOs.PostGroupDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.GroupController",
+    "Method": "GetGroupByIdAsync",
+    "RelativePath": "api/group/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.GroupDTOs.GetGroupDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.GroupController",
+    "Method": "UpdateGroupAsync",
+    "RelativePath": "api/group/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "groupDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.GroupDTOs.UpdateGroupDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.GroupController",
+    "Method": "DeleteGroupAsync",
+    "RelativePath": "api/group/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonController",
+    "Method": "CreateLessonAsync",
+    "RelativePath": "api/lesson",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lessonDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.Lesson.PostLessonDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.Lesson.PostLessonDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonController",
+    "Method": "GetAllLessonsAsync",
+    "RelativePath": "api/lesson",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Collections.Generic.IEnumerable\u00601[[WebApplicationCourseNTier.Business.DTOs.Lesson.GetLessonDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonStudentController",
+    "Method": "CreateStudentLessonAsync",
+    "RelativePath": "api/lesson-student",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentLessonDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.StudentLesson.PostStudentLessonDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.StudentLesson.PostStudentLessonDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonStudentController",
+    "Method": "GetAllStudentLessonsAsync",
+    "RelativePath": "api/lesson-student",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Collections.Generic.IEnumerable\u00601[[WebApplicationCourseNTier.Business.DTOs.StudentLesson.GetStudentLessonDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonStudentController",
+    "Method": "GetStudentLessonByIdAsync",
+    "RelativePath": "api/lesson-student/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.StudentLesson.GetStudentLessonDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonStudentController",
+    "Method": "UpdateStudentLessonAsync",
+    "RelativePath": "api/lesson-student/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "studentLessonDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.StudentLesson.UpdateStudentLessonDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonStudentController",
+    "Method": "DeleteStudentLessonAsync",
+    "RelativePath": "api/lesson-student/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonController",
+    "Method": "GetLessonByIdAsync",
+    "RelativePath": "api/lesson/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.Lesson.GetLessonDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonController",
+    "Method": "UpdateLessonAsync",
+    "RelativePath": "api/lesson/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "lessonDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.Lesson.UpdateLessonDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonController",
+    "Method": "DeleteLessonAsync",
+    "RelativePath": "api/lesson/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.LessonController",
+    "Method": "GetLessonsByGroupIdAsync",
+    "RelativePath": "api/lesson/group/{groupId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "groupId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Collections.Generic.IEnumerable\u00601[[WebApplicationCourseNTier.Business.DTOs.Lesson.GetLessonDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.StudentController",
+    "Method": "UpdateStudentAsync",
+    "RelativePath": "api/student/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "studentDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.StudentDTOs.UpdateStudentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.StudentController",
+    "Method": "DeleteStudentAsync",
+    "RelativePath": "api/student/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.StudentController",
+    "Method": "GetAllStudents",
+    "RelativePath": "api/student/All",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.StudentController",
+    "Method": "CreateStudent",
+    "RelativePath": "api/student/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatedDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "GroupNames",
+        "Type": "System.Collections.Generic.ICollection\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProfilePicture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.SubjectController",
+    "Method": "GetAllSubjectsAsync",
+    "RelativePath": "api/subject",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Collections.Generic.IEnumerable\u00601[[WebApplicationCourseNTier.Business.DTOs.SubjectDTOs.GetSubjectDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.SubjectController",
+    "Method": "GetSubjectByIdAsync",
+    "RelativePath": "api/subject/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.SubjectDTOs.GetSubjectDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.SubjectController",
+    "Method": "UpdateSubjectAsync",
+    "RelativePath": "api/subject/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subjectDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.SubjectDTOs.UpdateSubjectDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.SubjectController",
+    "Method": "DeleteSubjectAsync",
+    "RelativePath": "api/subject/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.SubjectController",
+    "Method": "CreateSubjectAsync",
+    "RelativePath": "api/subject/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subjectDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.SubjectDTOs.PostSubjectDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TeacherController",
+    "Method": "GetAllTeachersAsync",
+    "RelativePath": "api/teacher",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Collections.Generic.IEnumerable\u00601[[WebApplicationCourseNTier.Business.DTOs.TeacherDTOs.GetTeacherDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TeacherController",
+    "Method": "CreateTeacherAsync",
+    "RelativePath": "api/teacher",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.TeacherDTOs.PostTeacherDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.TeacherDTOs.PostTeacherDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TeacherController",
+    "Method": "GetTeacherByIdAsync",
+    "RelativePath": "api/teacher/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.TeacherDTOs.GetTeacherDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TeacherController",
+    "Method": "UpdateTeacherAsync",
+    "RelativePath": "api/teacher/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "teacherDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.TeacherDTOs.UpdateTeacherDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TeacherController",
+    "Method": "DeleteTeacherAsync",
+    "RelativePath": "api/teacher/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TopicController",
+    "Method": "CreateTopicAsync",
+    "RelativePath": "api/topic",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "topicDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.Topic.PostTopicDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.Topic.PostTopicDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TopicController",
+    "Method": "GetAllTopicsAsync",
+    "RelativePath": "api/topic",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Collections.Generic.IEnumerable\u00601[[WebApplicationCourseNTier.Business.DTOs.Topic.GetTopicDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TopicController",
+    "Method": "GetTopicByIdAsync",
+    "RelativePath": "api/topic/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[WebApplicationCourseNTier.Business.DTOs.Topic.GetTopicDto, WebApplicationCourseNTier.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TopicController",
+    "Method": "UpdateTopicAsync",
+    "RelativePath": "api/topic/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "topicDto",
+        "Type": "WebApplicationCourseNTier.Business.DTOs.Topic.UpdateTopicDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebApplicationCourseNTier.WebAPI.Controllers.TopicController",
+    "Method": "DeleteTopicAsync",
+    "RelativePath": "api/topic/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "WebApplicationCourseNTier.Business.DTOs.BaseResponseModel.GenericResponseModel\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

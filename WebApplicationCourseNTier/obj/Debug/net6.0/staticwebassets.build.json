@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "Hash": "Ul+qjzeHeFHVrlpPDBa/wUAjW8OgN4Zv9BFJCoSOPUw=",
+  "Source": "WebApplicationCourseNTier.API",
+  "BasePath": "_content/WebApplicationCourseNTier.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "WebApplicationCourseNTier.API\\wwwroot",
+      "Source": "WebApplicationCourseNTier.API",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\WebApplicationCourseNTierSln\\WebApplicationCourseNTier\\wwwroot\\",
+      "BasePath": "_content/WebApplicationCourseNTier.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\user\\source\\repos\\WebApplicationCourseNTierSln\\WebApplicationCourseNTier\\wwwroot\\uploads\\26\\wall.jpg",
+      "SourceId": "WebApplicationCourseNTier.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\WebApplicationCourseNTierSln\\WebApplicationCourseNTier\\wwwroot\\",
+      "BasePath": "_content/WebApplicationCourseNTier.API",
+      "RelativePath": "uploads/26/wall.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\26\\wall.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\source\\repos\\WebApplicationCourseNTierSln\\WebApplicationCourseNTier\\wwwroot\\uploads\\29\\wall.jpg",
+      "SourceId": "WebApplicationCourseNTier.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\WebApplicationCourseNTierSln\\WebApplicationCourseNTier\\wwwroot\\",
+      "BasePath": "_content/WebApplicationCourseNTier.API",
+      "RelativePath": "uploads/29/wall.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\29\\wall.jpg"
+    }
+  ]
+}

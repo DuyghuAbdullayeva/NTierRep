@@ -1,0 +1,27 @@
+﻿@model WebApplicationCourseNTier.Business.DTOs.StudentDTOs.UpdateStudentDto
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<h1>Edit Student</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()  
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="GroupNames">Groups (comma separated)</label>
+        <input type="text" class="form-control" id="GroupNames" name="GroupNames" value="@(Model.GroupNames != null ? string.Join(", ", Model.GroupNames) : "")" required />
+        <small class="form-text text-muted">Enter group names separated by commas.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="@Url.Action("All", "Student")" class="btn btn-secondary">Back to List</a>
+</form>

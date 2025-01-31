@@ -1,0 +1,20 @@
+﻿@model WebApplicationCourseNTier.MVC.Models.PaginationViewModel<WebApplicationCourseNTier.Business.DTOs.StudentDTOs.GetStudentDto>
+
+<nav>
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.PageNumber <= 1 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("All", new { pageNumber = Model.PageNumber - 1, pageSize = Model.PageSize })">Previous</a>
+        </li>
+
+        @for (int i = 1; i <= Math.Ceiling((double)Model.TotalCount / Model.PageSize); i++)
+        {
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                <a class="page-link" href="@Url.Action("All", new { pageNumber = i, pageSize = Model.PageSize })">@i</a>
+            </li>
+        }
+
+        <li class="page-item @(Model.PageNumber >= Math.Ceiling((double)Model.TotalCount / Model.PageSize) ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("All", new { pageNumber = Model.PageNumber + 1, pageSize = Model.PageSize })">Next</a>
+        </li>
+    </ul>
+</nav>

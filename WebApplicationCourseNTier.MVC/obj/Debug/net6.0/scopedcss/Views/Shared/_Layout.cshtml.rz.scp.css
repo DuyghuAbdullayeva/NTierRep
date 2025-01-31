@@ -1,0 +1,132 @@
+a.navbar-brand[b-cjo0lm8xbv] {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+a[b-cjo0lm8xbv] {
+    color: #0077cc;
+}
+
+.btn-primary[b-cjo0lm8xbv] {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-cjo0lm8xbv], .nav-pills .show > .nav-link[b-cjo0lm8xbv] {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.border-top[b-cjo0lm8xbv] {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom[b-cjo0lm8xbv] {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-cjo0lm8xbv] {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-cjo0lm8xbv] {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer[b-cjo0lm8xbv] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+.table th[b-cjo0lm8xbv], .table td[b-cjo0lm8xbv] {
+    vertical-align: middle;
+}
+
+.table td[b-cjo0lm8xbv] {
+    padding: 10px;
+}
+
+.table th[b-cjo0lm8xbv] {
+    text-align: center;
+}
+
+.table-hover tbody tr:hover[b-cjo0lm8xbv] {
+    background-color: #f0f8ff;
+}
+
+.custom-table[b-cjo0lm8xbv] {
+    width: 100%;
+    margin-top: 20px;
+}
+
+    .custom-table th[b-cjo0lm8xbv], .custom-table td[b-cjo0lm8xbv] {
+        padding: 12px;
+        text-align: center;
+    }
+
+.table-dark[b-cjo0lm8xbv] {
+    background-color: #343a40;
+    color: white;
+}
+
+.table th[b-cjo0lm8xbv] {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.table-hover tbody tr:hover[b-cjo0lm8xbv] {
+    background-color: #f1f1f1;
+}
+
+.btn[b-cjo0lm8xbv] {
+    margin: 0 5px;
+}
+
+.btn-primary[b-cjo0lm8xbv] {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+    .btn-primary:hover[b-cjo0lm8xbv] {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+.btn-danger[b-cjo0lm8xbv] {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-danger:hover[b-cjo0lm8xbv] {
+        background-color: #c82333;
+        border-color: #c82333;
+    }
+
+@media (max-width: 768px) {
+    .custom-table[b-cjo0lm8xbv] {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+/* Custom Table Styling */
+.table th[b-cjo0lm8xbv], .table td[b-cjo0lm8xbv] {
+    border: 1px solid #dee2e6; /* Adds borders between cells */
+}
+
+.table-hover tbody tr:hover[b-cjo0lm8xbv] {
+    background-color: #f1f1f1; /* Light grey hover effect */
+}
+
+.table td[b-cjo0lm8xbv] {
+    padding: 12px; /* Adds padding to each cell for better readability */
+}
+
+
