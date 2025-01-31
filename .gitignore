@@ -1,0 +1,66 @@
+# .NET Core / .NET 5+ build output
+/bin/
+/obj/
+
+/# User-specific files
+.vs/
+.vscode/
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer logs
+*.cab
+*.log
+
+# Windows image file
+Thumbs.db
+ehthumbs.db
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# JetBrains Rider
+.idea/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Tye files
+.tye/
+
+# VS for Mac
+.vscode/
+
+# .NET Core specific files
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# .NET build folders
+bin/
+obj/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# VS2019/VS2022 settings folder
+.vs2019/
+.vs2022/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
