@@ -1,0 +1,40 @@
+﻿@model WebApplicationCourseNTier.Business.DTOs.GroupDTOs.GetGroupDto
+
+@{
+    ViewData["Title"] = "Group Details";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Group Details: @Model.Name</h2>
+
+    <div class="mb-4">
+        <strong>Teacher:</strong> @Model.TeacherName
+    </div>
+    <div class="mb-4">
+        <strong>Subject:</strong> @Model.SubjectName
+    </div>
+
+    <h4>Students</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var studentName in Model.StudentNames)
+            {
+                <tr>
+                    <td>@studentName</td>
+                   
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-start">
+        <a class="btn btn-primary" href="@Url.Action("All", "Group")">Back to Groups</a>
+    </div>
+</div>
