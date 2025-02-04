@@ -7,7 +7,7 @@ namespace WebApplicationCourseNTier.MVC.Models
         [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Email is required.")]
+        //[Required(ErrorMessage = "Email is required.")]
         [EmailAddress]
         public string Email { get; set; }
 
