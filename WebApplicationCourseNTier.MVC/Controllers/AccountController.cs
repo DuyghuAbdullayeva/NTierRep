@@ -2,28 +2,28 @@
 using WebApplicationCourseNTier.DataAccess.Entities;
 using WebApplicationCourseNTier.MVC.Models;
 using WebApplicationCourseNTier.Business.Services.Abstractions;
-using System.Threading.Tasks;
-using WebApplicationCourseNTier.DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace UsersApp.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IUserService _userService;
+        private readonly RoleManager<Role> _roleManager;
 
-      
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, RoleManager<Role> roleManager)
         {
             _userService = userService;
+            _roleManager = roleManager;
         }
 
-  
         public IActionResult Login()
         {
             return View();
         }
 
-      
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -34,7 +34,7 @@ namespace UsersApp.Controllers
                 if (result.Succeeded)
                 {
                     await _userService.SignInUserAsync(model.Email, model.RememberMe);
-                    return RedirectToAction("All","Student");
+                    return RedirectToAction("All", "Student");
                 }
                 else
                 {
@@ -46,8 +46,12 @@ namespace UsersApp.Controllers
         }
 
         // Register GET
-        public IActionResult Register()
+        [HttpGet]
+        public async Task<IActionResult> Register()
         {
+            var roles = await _roleManager.Roles.ToListAsync();
+            ViewBag.Roles = new SelectList(roles, "Name", "Name");
+
             return View();
         }
 
@@ -64,27 +68,14 @@ namespace UsersApp.Controllers
                     UserName = model.Email,
                 };
 
-                var result = await _userService.RegisterUserAsync(new UserRegistrationModel
-                {
-                    FullName = model.Name,
-                    Email = model.Email,
-                    UserName = model.Email,
-                    Password = model.Password
-                });
+                var result = await _userService.CreateUserAsync(user, model.Password);
 
-                if (result.Succeeded)
+                if (!string.IsNullOrEmpty(model.Role) && (model.Role == "Admin" || model.Role == "Manager"))
                 {
-                    return RedirectToAction("Login", "Account");
+                    await _userService.AddUserToRoleAsync(user, model.Role);
                 }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
 
-                    return View(model);
-                }
+                return RedirectToAction("Login", "Account");
             }
             return View(model);
         }
@@ -168,6 +159,11 @@ namespace UsersApp.Controllers
         {
             await _userService.LogoutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

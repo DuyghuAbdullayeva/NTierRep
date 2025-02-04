@@ -11,20 +11,17 @@ namespace WebApplicationCourseNTier.DataAccess.Repositories.Implementations
         private readonly CourseSystemArcDBContext _context;
         private readonly UserManager<User> _userManager;
 
-      
         public UserRepository(CourseSystemArcDBContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
-
-     
+             
         public async Task<User> GetUserByIdAsync(string userId)
         {
             return await _context.Users.FindAsync(userId);
         }
-
-      
+              
         public async Task<SignInResult> ValidateUserCredentialsAsync(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -36,20 +33,17 @@ namespace WebApplicationCourseNTier.DataAccess.Repositories.Implementations
             }
             return SignInResult.Failed;
         }
-
-      
+              
         public async Task<User> FindUserByEmailAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
         }
-
-       
+               
         public async Task<IdentityResult> RemovePasswordAsync(User user)
         {
             return await _userManager.RemovePasswordAsync(user);
         }
-
-   
+           
         public async Task<IdentityResult> AddPasswordAsync(User user, string newPassword)
         {
             return await _userManager.AddPasswordAsync(user, newPassword);

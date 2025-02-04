@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebApplicationCourseNTier.MVC.Models;
 
@@ -17,7 +18,8 @@ namespace WebApplicationCourseNTier.MVC.Controllers
         {
             return View();
         }
-
+        
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult Privacy()
         {
             return View();

@@ -16,17 +16,13 @@ namespace WebApplicationCourseNTier.DataAccess.Extensions
     {
         public static void AddDataAccessLayer(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
-       
             serviceCollection.AddDbContext<CourseSystemArcDBContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                              options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-           
             //serviceCollection.AddScoped<IGroupRepository, GroupRepository>();
             //serviceCollection.AddScoped<IStudentRepository, StudentRepository>();
-            serviceCollection.AddScoped<IUserRepository, UserRepository>();
 
-           
-            serviceCollection.AddIdentity<User, IdentityRole>(options =>
+            serviceCollection.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 8;
@@ -37,10 +33,12 @@ namespace WebApplicationCourseNTier.DataAccess.Extensions
                 options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             })
-            .AddEntityFrameworkStores<CourseSystemArcDBContext>()
-            .AddDefaultTokenProviders(); 
+             .AddEntityFrameworkStores<CourseSystemArcDBContext>()
+             .AddDefaultTokenProviders();
 
-        
+            serviceCollection.AddScoped<IUserRepository, UserRepository>();
+            serviceCollection.AddScoped<IRoleRepository, RoleRepository>();
+
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

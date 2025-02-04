@@ -1,13 +1,14 @@
-﻿
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 using WebApplicationCourseNTier.DataAccess.Entities;
 using WebApplicationCourseNTier.DataAccess.Entities.Base;
 
 namespace WebApplicationCourseNTier.DataAccess.Data
 {
-    public class CourseSystemArcDBContext : IdentityDbContext<User>
+    public class CourseSystemArcDBContext : IdentityDbContext<User, Role, string>
     {
         public DbSet<Group> Groups { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -15,22 +16,27 @@ namespace WebApplicationCourseNTier.DataAccess.Data
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
-        public DbSet<StudentLesson>  StudentLessons { get; set; }
+        public DbSet<StudentLesson> StudentLessons { get; set; }
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<LessonTopic> LessonTopics {  get; set; }
+        public DbSet<LessonTopic> LessonTopics { get; set; }
         public DbSet<FileDetail> FileDetail { get; set; }
-        public DbSet<User> Users {  get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-          
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
+           
+            modelBuilder.Entity<Role>().HasData(
+                new Role { Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "ADMIN" },
+                new Role { Id = Guid.NewGuid().ToString(), Name = "Manager", NormalizedName = "MANAGER" }
+            );
         }
+
         public CourseSystemArcDBContext(DbContextOptions<CourseSystemArcDBContext> options)
-        : base(options) 
-        {
-        }
+        : base(options) { }
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker.Entries<BaseEntity>();
@@ -39,31 +45,26 @@ namespace WebApplicationCourseNTier.DataAccess.Data
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Entity.CreateDate = DateTime.Now; 
-                    
+                    entry.Entity.CreateDate = DateTime.Now;
                 }
+
                 else if (entry.State == EntityState.Modified)
                 {
-                    entry.Entity.UpdateDate = DateTime.Now; 
+                    entry.Entity.UpdateDate = DateTime.Now;
                 }
+
                 else if (entry.State == EntityState.Deleted)
                 {
-                   
                     if (entry.Entity is BaseEntity baseEntity)
                     {
                         entry.State = EntityState.Modified;
-                        baseEntity.IsDeleted = true; 
-                        baseEntity.DeleteDate = DateTime.Now; 
+                        baseEntity.IsDeleted = true;
+                        baseEntity.DeleteDate = DateTime.Now;
                     }
                 }
             }
 
-          
             return await base.SaveChangesAsync(cancellationToken);
         }
-
-
-
     }
 }
-
