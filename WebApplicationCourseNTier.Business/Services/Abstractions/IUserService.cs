@@ -19,5 +19,7 @@ namespace WebApplicationCourseNTier.Business.Services.Abstractions
         Task<IdentityResult> RemoveUserPasswordAsync(User user);
         Task<IdentityResult> AddUserPasswordAsync(User user, string newPassword);
         Task LogoutAsync();
+        Task AddUserToRoleAsync(User user, string role);
+        Task<IdentityResult> CreateUserAsync(User user, string password);
     }
 }

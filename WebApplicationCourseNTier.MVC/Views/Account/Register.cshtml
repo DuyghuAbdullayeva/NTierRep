@@ -1,5 +1,4 @@
-﻿
-@model RegisterViewModel;
+﻿@model RegisterViewModel;
 
 @{
     ViewData["Title"] = "Register";
@@ -30,6 +29,17 @@
                 <label asp-for="ConfirmPassword" class="form-label"></label>
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Role">Select Role</label>
+                <div class="form-group">
+                    <select asp-for="Role" asp-items="ViewBag.Roles" class="form-control">
+                        <option value="">-- Select Role --</option>
+@*                         <option value="Admin">Admin</option>
+                        <option value="Manager">Manager</option>
+                        <option value="User">User</option> *@
+                    </select>
+                </div>
             </div>
             <input type="submit" value="Register" class="btn btn-success w-100 p-2" />
             <p class="text-center mt-2">

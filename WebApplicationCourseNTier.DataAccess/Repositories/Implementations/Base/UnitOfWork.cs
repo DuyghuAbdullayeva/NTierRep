@@ -2,8 +2,6 @@
 using WebApplicationCourseNTier.DataAccess.Data;
 using WebApplicationCourseNTier.DataAccess.Repositories.Abstractions.Base;
 
-
-
 namespace WebApplicationNTier.DataAccess.Repositories.Implementations.Base
 {
     public class UnitOfWork : IUnitOfWork

@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebApplicationCourseNTier.Business.DTOs.BaseResponseModel;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplicationCourseNTier.Business.DTOs.GroupDTOs;
 using WebApplicationCourseNTier.Business.Services.Abstractions;
-using WebApplicationCourseNTier.Business.Services.Implementations;
 using WebApplicationCourseNTier.DataAccess.Models;
 
 namespace WebApplicationCourseNTier.MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class GroupController : Controller
     {
         private readonly IGroupService _groupService;
-
         private readonly IUserService _userService;
+
         public GroupController(IGroupService groupService,IUserService userService)
         {
             _groupService = groupService;
@@ -84,12 +84,12 @@ namespace WebApplicationCourseNTier.MVC.Controllers
         }
 
         [HttpGet]
-       
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _groupService.DeleteGroupAsync(id);
             return RedirectToAction("All");
         }
+
         [HttpGet]
         public async Task<IActionResult> All(int pageNumber = 1, int pageSize = 2)
         {
@@ -114,15 +114,8 @@ namespace WebApplicationCourseNTier.MVC.Controllers
 
                 return View(paginationResponse.Data); 
             }
-
-         
+                     
             return View("Error");
         }
-
-
-
-
-
-
     }
 }

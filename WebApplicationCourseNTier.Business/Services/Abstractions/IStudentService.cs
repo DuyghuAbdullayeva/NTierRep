@@ -21,10 +21,7 @@ namespace WebApplicationCourseNTier.Business.Services.Abstractions
         Task<bool> UpdateStudentAsync(int studentId,UpdateStudentDto updateStudentDto);
 
         Task<GenericResponseModel<PaginationResponse<GetStudentDto>>> GetAllStudentsApiAsync(PaginationRequest paginationRequest);
-        //Task<List<GetStudentDto>> GetAllStudentsAsync();
-        //Task<List<GetStudentDto>> GetAll(GetStudentDto getStudentDto);
-        Task<GenericResponseModel<PaginationResponse<GetStudentDto>>> GetAll(PaginationRequest paginationRequest);
+        //Task<GenericResponseModel<PaginationResponse<GetStudentDto>>> GetAll(PaginationRequest paginationRequest);
         Task<GenericResponseModel<bool>> DeleteStudentAsync(int id);
-
     }
 }

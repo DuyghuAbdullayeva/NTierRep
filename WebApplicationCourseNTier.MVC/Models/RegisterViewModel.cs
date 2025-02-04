@@ -21,5 +21,8 @@ namespace WebApplicationCourseNTier.MVC.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
+
+        // Rol seçimi
+        public string Role { get; set; }
     }
 }
