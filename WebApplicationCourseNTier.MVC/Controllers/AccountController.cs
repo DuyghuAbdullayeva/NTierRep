@@ -4,12 +4,16 @@ using WebApplicationCourseNTier.MVC.Models;
 using WebApplicationCourseNTier.Business.Services.Abstractions;
 using System.Threading.Tasks;
 using WebApplicationCourseNTier.DataAccess.Models;
+using Microsoft.AspNetCore.Identity;
+using WebApplicationCourseNTier.Business.Helper.Abstractions;
 
 namespace UsersApp.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IUserService _userService;
+        private readonly UserManager<User> _userManager;
+        private readonly IEmailSender _emailSender;
 
       
         public AccountController(IUserService userService)
@@ -31,6 +35,12 @@ namespace UsersApp.Controllers
             {
                 var result = await _userService.ValidateLoginAsync(model.Email, model.Password);
 
+                var user = await _userService.FindUserByEmailAsync(model.Email);
+                if (user != null && !await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    ModelState.AddModelError("", "Zəhmət olmasa, emailinizi təsdiqləyin.");
+                    return View(model);
+                }
                 if (result.Succeeded)
                 {
                     await _userService.SignInUserAsync(model.Email, model.RememberMe);
@@ -74,6 +84,15 @@ namespace UsersApp.Controllers
 
                 if (result.Succeeded)
                 {
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    // Təsdiq linki
+                    var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
+
+                    // Email göndər
+                    await _emailSender.SendEmail(user.Email, "Email Təsdiqi",
+                        $"Zəhmət olmasa, emailinizi təsdiqləmək üçün <a href='{confirmationLink}'>buraya</a> klikləyin.");
+
                     return RedirectToAction("Login", "Account");
                 }
                 else
@@ -87,6 +106,32 @@ namespace UsersApp.Controllers
                 }
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return BadRequest("İstifadəçi ID or token is wrong.");
+            }
+
+            User user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return BadRequest("User didn't find");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                return BadRequest("Email didn't confirm");
+            }
+
         }
 
         // Verify Email GET
@@ -112,6 +157,7 @@ namespace UsersApp.Controllers
                 {
                     return RedirectToAction("ChangePassword", "Account", new { username = user.UserName });
                 }
+
             }
             return View(model);
         }
