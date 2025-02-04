@@ -43,7 +43,7 @@ namespace WebApplicationCourseNTier.DataAccess.Repositories.Implementations
         }
 
 
-       
+
         public async Task<Group> GetGroupWithAllDetailsAsync(int groupId)
         {
             return await _context.Groups
@@ -52,7 +52,7 @@ namespace WebApplicationCourseNTier.DataAccess.Repositories.Implementations
                 .Include(g => g.GroupStudents)
                     .ThenInclude(gs => gs.Student)
                 .Include(g => g.Lessons)
-                .Where(g => g.Id == groupId && !g.IsDeleted) // Only include non-deleted group
+                .Where(g => g.Id == groupId && !g.IsDeleted)
                 .Select(g => new Group
                 {
                     Id = g.Id,
@@ -66,6 +66,7 @@ namespace WebApplicationCourseNTier.DataAccess.Repositories.Implementations
                 })
                 .FirstOrDefaultAsync();
         }
+
 
         // Get a group by its name (and ensure it is not deleted).
         public async Task<Group> GetByNameAsync(string name)

@@ -13,6 +13,7 @@ namespace WebApplicationCourseNTier.Business.Extensions
     {
         public static void AddBusinessLayer(this IServiceCollection services)
         {
+           
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IFileService, FileService>();

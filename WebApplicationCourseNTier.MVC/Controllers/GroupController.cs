@@ -117,5 +117,20 @@ namespace WebApplicationCourseNTier.MVC.Controllers
                      
             return View("Error");
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var response = await _groupService.GetGroupByIdAsync(id);
+
+            if (response.Data == null)
+            {
+                return NotFound();
+            }
+
+            return View(response.Data);
+        }
+
+
+
     }
 }
