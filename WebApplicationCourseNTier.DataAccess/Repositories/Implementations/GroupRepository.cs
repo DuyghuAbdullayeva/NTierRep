@@ -27,20 +27,21 @@ namespace WebApplicationCourseNTier.DataAccess.Repositories.Implementations
                 .Include(g => g.Subject)
                 .Include(g => g.GroupStudents)
                     .ThenInclude(gs => gs.Student)
-                .Include(g => g.Lessons);
-                   
-                
+                .Include(g => g.Lessons.Where(l => !l.IsDeleted)) // Only include non-deleted lessons
+                    .ThenInclude(l => l.LessonTopics) // Include lesson topics
+                    .ThenInclude(lt => lt.Topic); // Include topics related to the lesson
 
             int totalCount = await query.CountAsync();
 
             var groups = await query
-                .OrderBy(g => g.Name)  
-                .Skip((paginationRequest.PageNumber - 1) * paginationRequest.PageSize)  
-                .Take(paginationRequest.PageSize)  
+                .OrderBy(g => g.Name)
+                .Skip((paginationRequest.PageNumber - 1) * paginationRequest.PageSize)
+                .Take(paginationRequest.PageSize)
                 .ToListAsync();
 
             return new PaginationResponse<Group>(totalCount, groups);
         }
+
 
 
 
@@ -68,7 +69,44 @@ namespace WebApplicationCourseNTier.DataAccess.Repositories.Implementations
         }
 
 
-        // Get a group by its name (and ensure it is not deleted).
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public async Task<Group> GetByNameAsync(string name)
         {
             return await _context.Groups

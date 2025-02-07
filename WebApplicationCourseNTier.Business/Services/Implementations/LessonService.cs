@@ -1,11 +1,18 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApplicationCourseNTier.Business.DTOs.BaseResponseModel;
+using WebApplicationCourseNTier.Business.DTOs.GroupDTOs;
 using WebApplicationCourseNTier.Business.DTOs.Lesson;
+using WebApplicationCourseNTier.Business.DTOs.StudentDTOs;
+using WebApplicationCourseNTier.Business.DTOs.StudentLesson;
 using WebApplicationCourseNTier.Business.Services.Abstractions;
+using WebApplicationCourseNTier.DataAccess.Entities;
+using WebApplicationCourseNTier.DataAccess.Models;
 using WebApplicationCourseNTier.DataAccess.Repositories.Abstractions;
 using WebApplicationCourseNTier.DataAccess.Repositories.Abstractions.Base;
+using WebApplicationCourseNTier.DataAccess.Repositories.Implementations;
 
 public class LessonService : ILessonService
 {
@@ -17,18 +24,35 @@ public class LessonService : ILessonService
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _lessonRepository =_unitOfWork.GetRepository<ILessonRepository>();
+        _lessonRepository = _unitOfWork.GetRepository<ILessonRepository>();
     }
 
-    private ILessonRepository GetLessonRepository()
+    public async Task<GenericResponseModel<PaginationResponse<GetLessonDto>>> GetAllLessonsAsync(PaginationRequest paginationRequest)
     {
-        return _unitOfWork.GetRepository<ILessonRepository>();
+        var paginationResult = await _lessonRepository.GetAllLessonAsync(paginationRequest);
+        var lessonDtos = _mapper.Map<IEnumerable<GetLessonDto>>(paginationResult.Data);
+        return new GenericResponseModel<PaginationResponse<GetLessonDto>>
+        {
+            Data = new PaginationResponse<GetLessonDto>(paginationResult.TotalCount, lessonDtos),
+            StatusCode = 200
+        };
+    }
+
+    public async Task<GenericResponseModel<IEnumerable<GetLessonDto>>> GetLessonsByGroupIdAsync(int groupId)
+    {
+        var lessons = await _lessonRepository.GetLessonsByGroupIdAsync(groupId);
+        var lessonDtos = _mapper.Map<IEnumerable<GetLessonDto>>(lessons);
+
+        return new GenericResponseModel<IEnumerable<GetLessonDto>>
+        {
+            StatusCode = 200,
+            Data = lessonDtos,
+        };
     }
 
     public async Task<GenericResponseModel<GetLessonDto>> GetLessonByIdAsync(int id)
     {
-        var lessonRepository = GetLessonRepository();
-        var lesson = await lessonRepository.GetLessonWithDetailsAsync(id);
+        var lesson = await _lessonRepository.GetLessonByIdAsync(id);
 
         if (lesson == null)
         {
@@ -36,48 +60,78 @@ public class LessonService : ILessonService
             {
                 StatusCode = 404,
                 Data = null,
-               
             };
         }
 
         var lessonDto = _mapper.Map<GetLessonDto>(lesson);
+
         return new GenericResponseModel<GetLessonDto>
         {
             StatusCode = 200,
-            Data = lessonDto
+            Data = lessonDto,
         };
     }
 
-    public async Task<GenericResponseModel<PostLessonDto>> CreateLessonAsync(PostLessonDto lessonDto)
+    public async Task<GenericResponseModel<bool>> CreateLessonAsync(PostLessonDto postLessonDto)
     {
-        var lessonRepository = GetLessonRepository();
-        var lesson = _mapper.Map<Lesson>(lessonDto);
+        var group = await _lessonRepository.GetGroupByNameAsync(postLessonDto.GroupName);
 
-        var result = await lessonRepository.AddAsync(lesson);
-        if (result)
+        if (group == null)
         {
-            await _unitOfWork.CommitAsync();  // Commit transaction after changes
-
-            return new GenericResponseModel<PostLessonDto>
+            return new GenericResponseModel<bool>
             {
-                StatusCode = 201,
-                Data = lessonDto,
-               
+                StatusCode = 404,
+                Data = false,
             };
         }
 
-        return new GenericResponseModel<PostLessonDto>
+        if (group.IsDeleted)
         {
-            StatusCode = 400,
-            Data = null,
-          
+            return new GenericResponseModel<bool>
+            {
+                StatusCode = 400,
+                Data = false,
+            };
+        }
+
+        var lesson = _mapper.Map<Lesson>(postLessonDto);
+
+        lesson.GroupId = group.Id;
+
+        await _lessonRepository.AddAsync(lesson);
+        await _unitOfWork.CommitAsync();
+
+        return new GenericResponseModel<bool>
+        {
+            StatusCode = 201,
+            Data = true,
+        };
+    }
+
+    public async Task<GenericResponseModel<List<GetStudentLessonDto>>> GetStudentLessonsByLessonIdAsync(int lessonId)
+    {
+        var studentLessons = await _lessonRepository.GetStudentLessonsByLessonIdAsync(lessonId);
+
+        var result = studentLessons.Select(sl => new GetStudentLessonDto
+        {
+            LessonId = sl.LessonId,
+            StudentId = sl.StudentId,
+            StudentName = sl.Student.Name,
+            LessonName = sl.Lesson.Name,
+            StudentMark = sl.StudentMark,
+            AbsentMark = sl.AbsentMark
+        }).ToList();
+
+        return new GenericResponseModel<List<GetStudentLessonDto>>
+        {
+            StatusCode = 200,
+            Data = result
         };
     }
 
     public async Task<GenericResponseModel<bool>> UpdateLessonAsync(int id, UpdateLessonDto lessonDto)
     {
-        var lessonRepository = GetLessonRepository();
-        var lesson = await lessonRepository.GetByIdAsync(id);
+        var lesson = await _lessonRepository.GetByIdAsync(id);
 
         if (lesson == null)
         {
@@ -85,20 +139,43 @@ public class LessonService : ILessonService
             {
                 StatusCode = 404,
                 Data = false,
-               
             };
         }
 
+        if (!string.IsNullOrEmpty(lessonDto.GroupName))
+        {
+            var group = await _lessonRepository.GetGroupByNameAsync(lessonDto.GroupName);
+            if (group == null)
+            {
+                return new GenericResponseModel<bool>
+                {
+                    StatusCode = 404,
+                    Data = false,
+                };
+            }
+            if (group.IsDeleted)
+            {
+                return new GenericResponseModel<bool>
+                {
+                    StatusCode = 400,
+                    Data = false,
+                };
+            }
+            lesson.GroupId = group.Id;
+        }
+
         _mapper.Map(lessonDto, lesson);
-        var result = await lessonRepository.Update(lesson);
+
+      
+
+        var result = await _lessonRepository.Update(lesson);
         if (result)
         {
-            await _unitOfWork.CommitAsync();  // Commit transaction after changes
+            await _unitOfWork.CommitAsync();
             return new GenericResponseModel<bool>
             {
                 StatusCode = 200,
                 Data = true,
-               
             };
         }
 
@@ -106,70 +183,29 @@ public class LessonService : ILessonService
         {
             StatusCode = 400,
             Data = false,
-           
         };
     }
 
     public async Task<GenericResponseModel<bool>> DeleteLessonAsync(int id)
     {
-        var lessonRepository = GetLessonRepository();
-        var lesson = await lessonRepository.GetByIdAsync(id);
+        var lesson = await _lessonRepository.GetByIdAsync(id);
 
         if (lesson == null)
         {
             return new GenericResponseModel<bool>
             {
                 StatusCode = 404,
-                Data = false,
-                
+                Data = false
             };
         }
 
-        var result = await lessonRepository.RemoveAsync(lesson);
-        if (result)
-        {
-            await _unitOfWork.CommitAsync();  // Commit transaction after changes
-            return new GenericResponseModel<bool>
-            {
-                StatusCode = 200,
-                Data = true,
-                
-            };
-        }
+        await _lessonRepository.RemoveAsync(lesson);
+        await _unitOfWork.CommitAsync();
 
         return new GenericResponseModel<bool>
         {
-            StatusCode = 400,
-            Data = false,
-        
-        };
-    }
-
-    public async Task<GenericResponseModel<IEnumerable<GetLessonDto>>> GetAllLessonsAsync()
-    {
-        var lessonRepository = GetLessonRepository();
-        var lessons = await lessonRepository.GetAllAsync(null);
-        var lessonDtos = _mapper.Map<IEnumerable<GetLessonDto>>(lessons);
-
-        return new GenericResponseModel<IEnumerable<GetLessonDto>>
-        {
             StatusCode = 200,
-            Data = lessonDtos,
-          
-        };
-    }
-
-    public async Task<GenericResponseModel<IEnumerable<GetLessonDto>>> GetLessonsByGroupIdAsync(int groupId)
-    {
-        var lessonRepository = GetLessonRepository();
-        var lessons = await lessonRepository.GetLessonsByGroupIdAsync(groupId);
-        var lessonDtos = _mapper.Map<IEnumerable<GetLessonDto>>(lessons);
-
-        return new GenericResponseModel<IEnumerable<GetLessonDto>>
-        {
-            StatusCode = 200,
-            Data = lessonDtos,
-          
+            Data = true
         };
     }
 }

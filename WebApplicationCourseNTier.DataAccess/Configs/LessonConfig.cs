@@ -12,6 +12,7 @@ namespace WebApplicationCourseNTier.DataAccess.Configs
 
           
             builder.Property(l => l.Name).IsRequired().HasMaxLength(50);
+            builder.HasQueryFilter(x => x.IsDeleted == false);
             builder.Property(l => l.StartDate).IsRequired();
             builder.Property(l => l.EndDate).IsRequired();
 

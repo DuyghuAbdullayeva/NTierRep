@@ -9,7 +9,8 @@ namespace WebApplicationCourseNTier.DataAccess.Configs
     {
         public override void Configure(EntityTypeBuilder<Student> builder)
         {
-          
+            builder.HasQueryFilter(x => x.IsDeleted == false);
+
             builder.Property(s => s.Name).IsRequired().HasMaxLength(50);
             base.Configure(builder);
         }

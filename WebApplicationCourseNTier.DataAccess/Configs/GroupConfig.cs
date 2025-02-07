@@ -12,7 +12,7 @@ namespace WebApplicationCourseNTier.DataAccess.Configs
           
             builder.Property(g => g.Name).IsRequired().HasMaxLength(50);
 
-
+            builder.HasQueryFilter(x => x.IsDeleted == false);
             builder.HasOne(g => g.Teacher)
                 .WithMany(t => t.Groups)
                 .HasForeignKey(g => g.TeacherId)
@@ -26,9 +26,9 @@ namespace WebApplicationCourseNTier.DataAccess.Configs
             builder.HasMany(g => g.Lessons)
                 .WithOne(l => l.Group)
                 .HasForeignKey(l => l.GroupId);
-            base.Configure(builder); 
+            base.Configure(builder);
+           
 
-            
         }
     }
 }

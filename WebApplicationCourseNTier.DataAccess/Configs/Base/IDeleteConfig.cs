@@ -15,7 +15,7 @@ namespace WebApplicationCourseNTier.DataAccess.Configs.Base
         public override void Configure(EntityTypeBuilder<T> builder)
         {
             base.Configure(builder); 
-            builder.HasQueryFilter(x=>x.IsDeleted==false);
+       
             builder.Property(e => e.IsDeleted).IsRequired(); 
             builder.Property(e => e.DeleteDate).IsRequired(false);
         }

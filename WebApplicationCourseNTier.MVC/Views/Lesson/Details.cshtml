@@ -1,0 +1,41 @@
+﻿@model List<WebApplicationCourseNTier.Business.DTOs.StudentLesson.GetStudentLessonDto>
+
+@{
+    ViewData["Title"] = "Lesson Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Lesson Name</th>
+                <th>Mark</th>
+                <th>Absent</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var studentLesson in Model)
+            {
+                <tr>
+                    <td>@studentLesson.StudentName</td>
+                    <td>@studentLesson.LessonName</td>
+                    <td>@studentLesson.StudentMark</td>
+                    <td>@(studentLesson.AbsentMark ? "Yes" : "No")</td> 
+                </tr>
+            }
+        </tbody>
+    </table>
+
+   
+    <div class="d-flex justify-content-start">
+        <a class="btn btn-primary" href="@Url.Action("All", "Lesson")">Back to Groups</a>
+    </div>
+}
+else
+{
+    <p>No student lessons found for this lesson.</p>
+}
