@@ -35,12 +35,12 @@ namespace UsersApp.Controllers
             {
                 var result = await _userService.ValidateLoginAsync(model.Email, model.Password);
 
-                var user = await _userService.FindUserByEmailAsync(model.Email);
-                if (user != null && !await _userManager.IsEmailConfirmedAsync(user))
-                {
-                    ModelState.AddModelError("", "Zəhmət olmasa, emailinizi təsdiqləyin.");
-                    return View(model);
-                }
+                //var user = await _userService.FindUserByEmailAsync(model.Email);
+                //if (user != null && !await _userManager.IsEmailConfirmedAsync(user))
+                //{
+                //    ModelState.AddModelError("", "Zəhmət olmasa, emailinizi təsdiqləyin.");
+                //    return View(model);
+                //}
                 if (result.Succeeded)
                 {
                     await _userService.SignInUserAsync(model.Email, model.RememberMe);
@@ -84,14 +84,14 @@ namespace UsersApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    // Təsdiq linki
-                    var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
+                    //// Təsdiq linki
+                    //var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
 
-                    // Email göndər
-                    await _emailSender.SendEmail(user.Email, "Email Təsdiqi",
-                        $"Zəhmət olmasa, emailinizi təsdiqləmək üçün <a href='{confirmationLink}'>buraya</a> klikləyin.");
+                    //// Email göndər
+                    //await _emailSender.SendEmail(user.Email, "Email Təsdiqi",
+                    //    $"Zəhmət olmasa, emailinizi təsdiqləmək üçün <a href='{confirmationLink}'>buraya</a> klikləyin.");
 
                     return RedirectToAction("Login", "Account");
                 }
@@ -108,31 +108,31 @@ namespace UsersApp.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
-        {
-            if (userId == null || token == null)
-            {
-                return BadRequest("İstifadəçi ID or token is wrong.");
-            }
+        //public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        //{
+        //    if (userId == null || token == null)
+        //    {
+        //        return BadRequest("User ID or token is wrong.");
+        //    }
 
-            User user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return BadRequest("User didn't find");
-            }
+        //    User user = await _userManager.FindByIdAsync(userId);
+        //    if (user == null)
+        //    {
+        //        return BadRequest("User didn't find");
+        //    }
 
-            var result = await _userManager.ConfirmEmailAsync(user, token);
+        //    var result = await _userManager.ConfirmEmailAsync(user, token);
 
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            else
-            {
-                return BadRequest("Email didn't confirm");
-            }
+        //    if (result.Succeeded)
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //    else
+        //    {
+        //        return BadRequest("Email didn't confirm");
+        //    }
 
-        }
+        //}
 
         // Verify Email GET
         public IActionResult VerifyEmail()

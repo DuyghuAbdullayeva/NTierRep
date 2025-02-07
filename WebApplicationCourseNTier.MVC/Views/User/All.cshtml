@@ -11,13 +11,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Model)
+        @if(Model is not null)
         {
-            <tr>
-                <td>1</td>
-                <td>Adham</td>
-                <td>Polad</td>
-            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>1</td>
+                    <td>Adham</td>
+                    <td>Polad</td>
+                </tr>
+            }
         }
+        
     </tbody>
 </table>

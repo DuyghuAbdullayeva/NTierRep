@@ -175,7 +175,7 @@ namespace WebApplicationCourseNTier.Controllers
             return View(studentDto);
         }
 
-        [HttpPost]
+        //[HttpPost]
 
         public async Task<IActionResult> Delete(int id)
         {

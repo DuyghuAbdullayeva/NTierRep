@@ -12,6 +12,7 @@ namespace WebApplicationCourseNTier.DataAccess.Configs
           
             builder.Property(g => g.Name).IsRequired().HasMaxLength(50);
 
+            builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.HasOne(g => g.Teacher)
                 .WithMany(t => t.Groups)
