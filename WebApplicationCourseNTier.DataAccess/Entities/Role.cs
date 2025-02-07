@@ -2,8 +2,5 @@
 
 namespace WebApplicationCourseNTier.DataAccess.Entities
 {
-    public class User : IdentityUser
-    {
-        public string FullName { get; set; }
-    }
+    public class Role : IdentityRole {}
 }

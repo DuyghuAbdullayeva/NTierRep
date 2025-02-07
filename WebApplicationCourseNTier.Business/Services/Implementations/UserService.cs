@@ -1,11 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 using WebApplicationCourseNTier.Business.Services.Abstractions;
 using WebApplicationCourseNTier.DataAccess.Entities;
 using WebApplicationCourseNTier.DataAccess.Models;
 using WebApplicationCourseNTier.DataAccess.Repositories.Abstractions;
-using WebApplicationCourseNTier.DataAccess.Repositories.Implementations;
 
 namespace WebApplicationCourseNTier.Business.Services.Implementations
 {
@@ -13,14 +10,27 @@ namespace WebApplicationCourseNTier.Business.Services.Implementations
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
         private IUserRepository _userRepository;
 
-        public UserService(SignInManager<User> signInManager, UserManager<User> userManager, IUserRepository userRepository)
+        public UserService(SignInManager<User> signInManager, UserManager<User> userManager, IUserRepository userRepository, RoleManager<Role> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _userRepository = userRepository;
+            _roleManager = roleManager;
         }
+
+        public async Task<IdentityResult> CreateUserAsync(User user, string password)
+        {
+            return await _userManager.CreateAsync(user, password);
+        }
+
+        public async Task AddUserToRoleAsync(User user, string role)
+        {
+            await _userManager.AddToRoleAsync(user, role);
+        }
+
         public async Task<User> FindUserByEmailAsync(string email)
         {
             return await _userRepository.FindUserByEmailAsync(email);
@@ -30,7 +40,6 @@ namespace WebApplicationCourseNTier.Business.Services.Implementations
         {
             return await _userRepository.RemovePasswordAsync(user);
         }
-
 
         public async Task<IdentityResult> AddUserPasswordAsync(User user, string newPassword)
         {
@@ -43,24 +52,24 @@ namespace WebApplicationCourseNTier.Business.Services.Implementations
             return user != null;
         }
 
-
         public async Task<IdentityResult> RegisterUserAsync(UserRegistrationModel model)  
         {
             var user = new User
             {
-                FullName = model.FullName,   
+                FullName = model.FullName,
                 Email = model.Email,
                 UserName = model.UserName
             };
-
-            
+                        
             var result = await _userManager.CreateAsync(user, model.Password);
             return result;
         }
+        
         public async Task<SignInResult> ValidateLoginAsync(string email, string password)
         {
             return await _userRepository.ValidateUserCredentialsAsync(email, password);
         }
+
         public async Task SignInUserAsync(string email, bool rememberMe)
         {
             var user = await _userManager.FindByEmailAsync(email);

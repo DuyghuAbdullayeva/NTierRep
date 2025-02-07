@@ -15,7 +15,7 @@
 //    public static class IServiceCollectionExtensions
 //    {
 //        public static IServiceCollection AddBusinessLayer(this IServiceCollection services)
-//        { 
+//        {
 //            services.AddScoped<IStudentService, StudentService>();
 //            services.AddScoped<IGroupService, GroupService>();
 //            services.AddScoped<ISubjectService, SubjectService>();
@@ -32,7 +32,7 @@
 //            serviceCollection.AddDbContext<CourseSystemArcDBContext>(options =>
 //            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-          
+
 
 //            serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
 //            return serviceCollection;

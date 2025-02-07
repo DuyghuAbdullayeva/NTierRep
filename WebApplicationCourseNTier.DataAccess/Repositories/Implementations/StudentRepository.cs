@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApplicationCourseNTier.DataAccess.Entities;
 using WebApplicationCourseNTier.DataAccess.Data;
 using WebApplicationCourseNTier.DataAccess.Repositories.Abstractions;
 using WebApplicationCourseNTier.DataAccess.Repositories.Implementations.Base;
 using WebApplicationCourseNTier.DataAccess.Models;
-using System.Drawing.Printing;
 
 namespace WebApplicationCourseNTier.DataAccess.Repositories.Implementations
 {
