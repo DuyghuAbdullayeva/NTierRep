@@ -19,7 +19,6 @@ namespace WebApplicationCourseNTier.Business.DTOs.GroupDTOs
         public int SubjectId { get; set; }
         public string SubjectName { get; set; }
         public ICollection<string> StudentNames { get; set; }
-
         public ICollection<string> LessonNames { get; set; }
     }
 }

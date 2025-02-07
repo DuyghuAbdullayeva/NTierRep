@@ -23,11 +23,11 @@
                 <tr>
                     <th scope="col" class="bg-primary text-white">Id</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Teacher Id</th>
+
                     <th scope="col">Teacher Name</th>
-                    <th scope="col">Subject Id</th>
+                   
                     <th scope="col">Subject Name</th>
-                    <th scope="col">Students</th>
+                   
                     <th scope="col">Student Count</th>
                     <th scope="col">Lessons</th>
                     <th scope="col">Lesson Count</th>
@@ -42,15 +42,12 @@
                         <tr>
                             <td class="bg-primary text-white">@group.Id</td>
                             <td>@group.Name</td>
-                            <td>@group.TeacherId</td>
+                        
                             <td>@group.TeacherName</td>
-                            <td>@group.SubjectId</td>
+                         
                             <td>@group.SubjectName</td>
 
-                            <td>
-                                @string.Join(", ", group.StudentNames)
-                            </td>
-
+                         
                             <td>@group.StudentNames?.Count()</td>
 
                             <td>
@@ -69,8 +66,13 @@
                                     <a class="btn btn-danger btn-sm text-white mx-2" asp-controller="Group" asp-action="Delete" asp-route-id="@group.Id" onclick="return confirm('Are you sure you want to delete this group?');">
                                         <i class="fas fa-trash-alt"></i> Delete
                                     </a>
+                                    <!-- Details Button -->
+                                    <a class="btn btn-info btn-sm text-white mx-2" asp-controller="Group" asp-action="Details" asp-route-id="@group.Id">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </a>
                                 </div>
                             </td>
+
                         </tr>
                     }
                 }
