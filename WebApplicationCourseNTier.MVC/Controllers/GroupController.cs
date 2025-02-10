@@ -93,10 +93,10 @@ namespace WebApplicationCourseNTier.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> All(int pageNumber = 1, int pageSize = 2)
         {
-            if (!await _userService.IsUserLoggedInAsync())
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if (!await _userService.IsUserLoggedInAsync())
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
             var paginationRequest = new PaginationRequest
             {
                 PageNumber = pageNumber,

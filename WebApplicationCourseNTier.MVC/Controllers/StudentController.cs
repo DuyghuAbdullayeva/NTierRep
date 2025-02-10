@@ -61,10 +61,10 @@ namespace WebApplicationCourseNTier.Controllers
         [HttpGet]
         public async Task<IActionResult> All(PaginationRequest paginationRequest)
         {
-            if (!await _userService.IsUserLoggedInAsync())
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            //if (!await _userService.IsUserLoggedInAsync())
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
 
             var response = await _studentService.GetAll(paginationRequest);
 
