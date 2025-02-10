@@ -6,6 +6,9 @@ using WebApplicationCourseNTier.API.Configs;
 using WebApplicationCourseNTier.Business.Extensions;
 using WebApplicationCourseNTier.DataAccess.Extensions;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebApplicationCourseNTier
 {
@@ -24,7 +27,24 @@ namespace WebApplicationCourseNTier
             builder.Services.AddBusinessLayer();
             builder.Services.AddDataAccessLayer(builder.Configuration);
             builder.Services.AddHttpClient();
-           
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+             .AddJwtBearer(opt =>
+             {
+                 opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                 {
+                     ValidateIssuer = true,
+                     ValidateAudience = true,
+                     ValidateIssuerSigningKey = true,
+                     ValidateLifetime = true,
+                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                     ValidAudience = builder.Configuration["Jwt:Audience"],
+                     // Fixed typo here
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
+                 };
+
+
+             
+             });
 
             // Register Swagger/OpenAPI
             builder.Services.AddEndpointsApiExplorer();

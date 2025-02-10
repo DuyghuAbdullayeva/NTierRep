@@ -16,9 +16,8 @@ namespace WebApplicationCourseNTier.Business.DTOs.Lesson
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string GroupName { get; set; } 
-        public ICollection<StudentDTO> Students { get; set; } 
-        public ICollection<TopicDto> Topics { get; set; }
+        public string GroupName { get; set; }
+        public ICollection<StudentDTO> Students { get; set; }
 
     }
 }
