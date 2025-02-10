@@ -11,6 +11,8 @@ using WebApplicationCourseNTier.DataAccess.Data;
 
 using WebApplicationCourseNTier.Business.DTOs.StudentDTOs;
 using WebApplicationCourseNTier.DataAccess.Models;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 public class GroupService : IGroupService
 {
@@ -18,13 +20,18 @@ public class GroupService : IGroupService
     private readonly CourseSystemArcDBContext _context;
     private readonly IMapper _mapper;
     private readonly IGroupRepository _groupRepository;
+    private readonly HttpClient _httpClient;
 
-    public GroupService(IUnitOfWork unitOfWork, IMapper mapper, CourseSystemArcDBContext context)
+    public GroupService(IUnitOfWork unitOfWork, IMapper mapper, CourseSystemArcDBContext context
+         ,IHttpClientFactory httpClientFactory
+         ,IConfiguration configuration)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _context = context;
         _groupRepository = _unitOfWork.GetRepository<IGroupRepository>();
+        _httpClient = httpClientFactory.CreateClient();
+        _httpClient.BaseAddress = new Uri(configuration["StudentApi"]);
     }
 
 
@@ -90,7 +97,7 @@ public class GroupService : IGroupService
             };
         }
 
-      
+
         var group = new Group
         {
             Name = groupDto.Name,
@@ -133,7 +140,7 @@ public class GroupService : IGroupService
             };
         }
 
-       
+
         _mapper.Map(groupDto, group);
 
         var isUpdated = await _groupRepository.Update(group);
@@ -157,6 +164,33 @@ public class GroupService : IGroupService
         };
     }
 
+    public async Task<GenericResponseModel<bool>> DeleteMvcAsync(int id)
+    {
+        HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"/api/group/{id}");
+        GenericResponseModel<bool> model = new()
+        {
+            Data = false,
+            StatusCode = 400
+        };
+
+        if (httpResponse.IsSuccessStatusCode)
+        {
+            string responseStr = await httpResponse.Content.ReadAsStringAsync();
+            var response = JsonConvert.DeserializeObject<bool>(responseStr);  
+
+            if(response is true)
+            {
+                model.Data = true;
+                model.StatusCode = 200;
+                return model;
+            }
+        }
+
+        return model;
+    }
+
+
+
     public async Task<GenericResponseModel<bool>> DeleteGroupAsync(int id)
     {
         var group = await _groupRepository.GetByIdAsync(id);
@@ -170,7 +204,7 @@ public class GroupService : IGroupService
             };
         }
 
-   
+
         group.IsDeleted = true;
 
         var isDeleted = await _groupRepository.Update(group);
@@ -195,7 +229,7 @@ public class GroupService : IGroupService
     }
     public async Task<GenericResponseModel<PaginationResponse<GetGroupDto>>> GetAllGroupsAsync(PaginationRequest paginationRequest)
     {
-     
+
         var paginationResult = await _groupRepository.GetAllGroupAsync(paginationRequest);
         var groupDtos = _mapper.Map<IEnumerable<GetGroupDto>>(paginationResult.Data);
         return new GenericResponseModel<PaginationResponse<GetGroupDto>>

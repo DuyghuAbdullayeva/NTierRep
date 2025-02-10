@@ -10,6 +10,8 @@ namespace WebApplicationCourseNTier.DataAccess.Configs
         public override void Configure(EntityTypeBuilder<StudentLesson> builder)
         {
             builder.HasKey(lt => new { lt.LessonId, lt.StudentId });
+            builder.Property(x => x.StudentMark)
+                   .HasPrecision(5, 2);
 
             builder.HasOne(sl => sl.Student)
                 .WithMany(s => s.Lessons)
