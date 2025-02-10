@@ -267,6 +267,32 @@ namespace WebApplicationCourseNTier.Business.Services.Implementations
         }
 
 
+        public async Task<GenericResponseModel<bool>> DeleteMvcAsync(int id)
+        {
+            HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"/api/student/{id}");
+
+            GenericResponseModel<bool> model = new()
+            {
+                Data = false,
+                StatusCode = 400
+            };
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                string responseStr = await httpResponse.Content.ReadAsStringAsync();
+                var response = JsonConvert.DeserializeObject<bool>(responseStr);
+                if(response is true)
+                {
+                    model.Data = true;
+                    model.StatusCode = 200;
+                    return model;
+                }
+            }
+
+            return model;
+        }
+
+
+
         public async Task<GenericResponseModel<bool>> DeleteStudentAsync(int id)
             {
 

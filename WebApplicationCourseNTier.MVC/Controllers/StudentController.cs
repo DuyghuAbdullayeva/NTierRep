@@ -179,7 +179,7 @@ namespace WebApplicationCourseNTier.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _studentService.DeleteStudentAsync(id);
+            var response = await _studentService.DeleteMvcAsync(id);
             if (response.StatusCode == 200 && response.Data)
             {
                 return RedirectToAction("All");

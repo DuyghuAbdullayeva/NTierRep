@@ -25,6 +25,6 @@ namespace WebApplicationCourseNTier.Business.Services.Abstractions
         //Task<List<GetStudentDto>> GetAll(GetStudentDto getStudentDto);
         Task<GenericResponseModel<PaginationResponse<GetStudentDto>>> GetAll(PaginationRequest paginationRequest);
         Task<GenericResponseModel<bool>> DeleteStudentAsync(int id);
-
+        Task<GenericResponseModel<bool>> DeleteMvcAsync(int id);
     }
 }

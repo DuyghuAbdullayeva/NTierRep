@@ -87,7 +87,7 @@ namespace WebApplicationCourseNTier.MVC.Controllers
        
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _groupService.DeleteGroupAsync(id);
+            var response = await _groupService.DeleteMvcAsync(id);
             return RedirectToAction("All");
         }
         [HttpGet]

@@ -16,5 +16,6 @@ namespace WebApplicationCourseNTier.Business.Services.Abstractions
         Task<GenericResponseModel<bool>> UpdateGroupAsync(int id, UpdateGroupDto groupDto);
         Task<GenericResponseModel<bool>> DeleteGroupAsync(int id);
         Task<GenericResponseModel<PaginationResponse<GetGroupDto>>> GetAllGroupsAsync(PaginationRequest paginationRequest);
+        Task<GenericResponseModel<bool>> DeleteMvcAsync(int id);
     }
 }
