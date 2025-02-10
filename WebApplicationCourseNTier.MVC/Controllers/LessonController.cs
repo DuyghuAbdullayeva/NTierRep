@@ -47,29 +47,26 @@ namespace WebApplicationCourseNTier.MVC.Controllers
             return View(lessonDto);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> All(int pageNumber = 1, int pageSize = 15)
+        public async Task<IActionResult> All(PaginationRequest paginationRequest)
         {
-            var paginationRequest = new PaginationRequest
+            var response = await _lessonService.GetAllLessonsAsync(paginationRequest);
+
+            if (response == null || response.Data == null)
             {
-                PageNumber = pageNumber,
-                PageSize = pageSize
-            };
-
-
-            var paginationResponse = await _lessonService.GetAllLessonsAsync(paginationRequest);
-
-            if (paginationResponse.StatusCode == 200)
-            {
-
-                ViewData["PaginationResponse"] = paginationResponse.Data;
-                ViewData["PaginationRequest"] = paginationRequest;
-
-                return View(paginationResponse.Data);
+                return View("Error");
             }
 
+            var paginationResponse = response.Data;
 
-            return View("Error");
+            PaginationViewModel<GetLessonDto> viewModel = new()
+            {
+                Values = paginationResponse.Data,
+                PageNumber = paginationRequest.PageNumber,
+                PageSize = paginationRequest.PageSize,
+                TotalCount = paginationResponse.TotalCount
+            };
+
+            return View("All", viewModel);
         }
 
         public async Task<IActionResult> Edit(int id)

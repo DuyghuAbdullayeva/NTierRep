@@ -20,7 +20,7 @@ namespace WebApplicationCourseNTier.Controllers
         private readonly IUserService _userService;
         private readonly IGroupService _groupService;
 
-        public StudentController(IStudentService studentService, IGroupService groupService,IUserService userService)
+        public StudentController(IStudentService studentService, IGroupService groupService, IUserService userService)
         {
             _studentService = studentService;
             _groupService = groupService;
@@ -33,7 +33,7 @@ namespace WebApplicationCourseNTier.Controllers
 
             var groupNames = await _groupService.GetAllGroupNamesAsync();
 
-           
+
             var postStudentDto = new PostStudentDto
             {
                 GroupNames = groupNames.ToList()
@@ -44,27 +44,27 @@ namespace WebApplicationCourseNTier.Controllers
 
         // POST: /Student/Create
         [HttpPost("Create")]
-        public async Task<IActionResult> Create( PostStudentDto postStudentDto)
+        public async Task<IActionResult> Create(PostStudentDto postStudentDto)
         {
-            
+
             var response = await _studentService.AddAsync(postStudentDto);
 
-            if (response.StatusCode==201 || response.Data ==true)
+            if (response.StatusCode == 201 || response.Data == true)
             {
                 return RedirectToAction("All");
             }
 
 
 
-            return View("Error"); 
+            return View("Error");
         }
         [HttpGet]
         public async Task<IActionResult> All(PaginationRequest paginationRequest)
         {
-            //if (!await _userService.IsUserLoggedInAsync())
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
+            if (!await _userService.IsUserLoggedInAsync())
+            {
+                return RedirectToAction("Login", "Account");
+            }
 
             var response = await _studentService.GetAll(paginationRequest);
 
@@ -86,75 +86,75 @@ namespace WebApplicationCourseNTier.Controllers
             return View("All", viewModel);
         }
 
-    //public async Task<IActionResult> Create()
-    //{
-    //    // Pagination parameters (adjust as needed)
-    //    var paginationRequest = new PaginationRequest
-    //    {
-    //        PageNumber = 1,
-    //        PageSize = 10
-    //    };
+        //public async Task<IActionResult> Create()
+        //{
+        //    // Pagination parameters (adjust as needed)
+        //    var paginationRequest = new PaginationRequest
+        //    {
+        //        PageNumber = 1,
+        //        PageSize = 10
+        //    };
 
-    //    // Fetch the groups asynchronously
-    //    var response = await _groupService.GetAllGroupsAsync(paginationRequest);
+        //    // Fetch the groups asynchronously
+        //    var response = await _groupService.GetAllGroupsAsync(paginationRequest);
 
-    //    if (response.StatusCode == 200)
-    //    {
-    //        // Pass the group names to the view
-    //        ViewData["AvailableGroups"] = response.Data.Data.Select(g => g.Name).ToList();
-    //    }
-    //    else
-    //    {
-    //        // Handle error if fetching groups fails
-    //        ModelState.AddModelError(string.Empty, "An error occurred while fetching groups.");
-    //    }
+        //    if (response.StatusCode == 200)
+        //    {
+        //        // Pass the group names to the view
+        //        ViewData["AvailableGroups"] = response.Data.Data.Select(g => g.Name).ToList();
+        //    }
+        //    else
+        //    {
+        //        // Handle error if fetching groups fails
+        //        ModelState.AddModelError(string.Empty, "An error occurred while fetching groups.");
+        //    }
 
-    //    // Return the view with an empty student DTO for the form
-    //    return View(new PostStudentDto());
-    //}
+        //    // Return the view with an empty student DTO for the form
+        //    return View(new PostStudentDto());
+        //}
 
-    //// POST: /Student/Create
-    //[HttpPost]
-    //public async Task<IActionResult> Create(PostStudentDto studentDto)
-    //{
-    //    if (ModelState.IsValid)
-    //    {
-    //        var response = await _studentService.AddAsync(studentDto);
+        //// POST: /Student/Create
+        //[HttpPost]
+        //public async Task<IActionResult> Create(PostStudentDto studentDto)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var response = await _studentService.AddAsync(studentDto);
 
-    //        if (response.StatusCode == 201)
-    //        {
-    //            return RedirectToAction("All");
-    //        }
-    //        else
-    //        {
-    //            ModelState.AddModelError(string.Empty, "An error occurred while creating the student.");
-    //        }
-    //    }
+        //        if (response.StatusCode == 201)
+        //        {
+        //            return RedirectToAction("All");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError(string.Empty, "An error occurred while creating the student.");
+        //        }
+        //    }
 
-    //    return View(studentDto);
-    //}
+        //    return View(studentDto);
+        //}
 
 
-    //public async Task<IActionResult> Edit(int id)
-    //{
-    //    var response = await _studentService.GetByIdAsync(id);
+        //public async Task<IActionResult> Edit(int id)
+        //{
+        //    var response = await _studentService.GetByIdAsync(id);
 
-    //    if (response.StatusCode != 200 || response.Data == null)
-    //    {
-    //        return View("Error");
-    //    }
+        //    if (response.StatusCode != 200 || response.Data == null)
+        //    {
+        //        return View("Error");
+        //    }
 
-    //    var updateStudentDto = new UpdateStudentDto
-    //    {
-    //        Id = response.Data.Id,
-    //        Name = response.Data.Name,
-    //        GroupNames = response.Data.GroupNames
-    //    };
+        //    var updateStudentDto = new UpdateStudentDto
+        //    {
+        //        Id = response.Data.Id,
+        //        Name = response.Data.Name,
+        //        GroupNames = response.Data.GroupNames
+        //    };
 
-    //    return View(updateStudentDto);
-    //}
+        //    return View(updateStudentDto);
+        //}
 
-    [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, UpdateStudentDto studentDto)
         {
@@ -175,11 +175,11 @@ namespace WebApplicationCourseNTier.Controllers
             return View(studentDto);
         }
 
-        [HttpPost]
+        //[HttpPost]
 
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _studentService.DeleteStudentAsync(id);
+            var response = await _studentService.DeleteMvcAsync(id);
             if (response.StatusCode == 200 && response.Data)
             {
                 return RedirectToAction("All");

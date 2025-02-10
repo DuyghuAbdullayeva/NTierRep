@@ -12,7 +12,7 @@ namespace WebApplicationCourseNTier.MVC.Controllers
         private readonly IGroupService _groupService;
 
         private readonly IUserService _userService;
-        public GroupController(IGroupService groupService,IUserService userService)
+        public GroupController(IGroupService groupService, IUserService userService)
         {
             _groupService = groupService;
             _userService = userService;
@@ -84,38 +84,38 @@ namespace WebApplicationCourseNTier.MVC.Controllers
         }
 
         [HttpGet]
-       
+
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _groupService.DeleteGroupAsync(id);
+            var response = await _groupService.DeleteMvcAsync(id);
             return RedirectToAction("All");
         }
         [HttpGet]
         public async Task<IActionResult> All(int pageNumber = 1, int pageSize = 2)
         {
-            //if (!await _userService.IsUserLoggedInAsync())
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
+            if (!await _userService.IsUserLoggedInAsync())
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var paginationRequest = new PaginationRequest
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize
             };
 
-      
+
             var paginationResponse = await _groupService.GetAllGroupsAsync(paginationRequest);
 
             if (paginationResponse.StatusCode == 200)
             {
-                
+
                 ViewData["PaginationResponse"] = paginationResponse.Data;
                 ViewData["PaginationRequest"] = paginationRequest;
 
-                return View(paginationResponse.Data); 
+                return View(paginationResponse.Data);
             }
 
-         
+
             return View("Error");
         }
 

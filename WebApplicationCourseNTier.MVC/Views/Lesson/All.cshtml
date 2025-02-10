@@ -1,12 +1,8 @@
-﻿@model WebApplicationCourseNTier.DataAccess.Models.PaginationResponse<WebApplicationCourseNTier.Business.DTOs.Lesson.GetLessonDto>;
+﻿@model PaginationViewModel<WebApplicationCourseNTier.Business.DTOs.Lesson.GetLessonDto>
 
 @{
     ViewData["Title"] = "All Lessons";
-    var paginationRequest = ViewData["PaginationRequest"] as WebApplicationCourseNTier.DataAccess.Models.PaginationRequest;
-    var paginationResponse = ViewData["PaginationResponse"] as WebApplicationCourseNTier.DataAccess.Models.PaginationResponse<WebApplicationCourseNTier.Business.DTOs.Lesson.GetLessonDto>;
-
-    // Calculate total pages
-    var totalPages = Math.Ceiling((double)(paginationResponse?.TotalCount ?? 0) / (paginationRequest?.PageSize ?? 10));
+    int totalPages = (int)Math.Ceiling((double)Model.TotalCount / Model.PageSize);
 }
 
 <!-- Create Lesson Button -->
@@ -29,7 +25,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var lesson in paginationResponse.Data) 
+        @foreach (var lesson in Model.Values)
         {
             <tr>
                 <td>@lesson.Name</td>
@@ -59,39 +55,29 @@
     </tbody>
 </table>
 
-<div class="d-flex justify-content-between">
-    <div>
-        @if (paginationRequest != null && paginationResponse != null)
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <!-- Previous button -->
+        <li class="page-item @(Model.PageNumber <= 1 ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("All", new { pageNumber = Model.PageNumber - 1, pageSize = Model.PageSize })" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        <!-- Page numbers -->
+        @for (int i = 1; i <= totalPages; i++)
         {
-            <strong>Page @paginationRequest.PageNumber of @totalPages</strong>
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                <a class="page-link" href="@Url.Action("All", new { pageNumber = i, pageSize = Model.PageSize })">@i</a>
+            </li>
         }
-    </div>
 
-    <div>
-        <ul class="pagination">
-            <!-- Previous button, only shown if the current page is greater than 1 -->
-            @if (paginationRequest?.PageNumber > 1)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="@Url.Action("All", "Lesson", new { pageNumber = paginationRequest.PageNumber - 1, pageSize = paginationRequest.PageSize })">Previous</a>
-                </li>
-            }
-
-            <!-- Page number buttons -->
-            @for (int i = 1; i <= totalPages; i++)
-            {
-                <li class="page-item @(i == paginationRequest?.PageNumber ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("All", "Lesson", new { pageNumber = i, pageSize = paginationRequest?.PageSize })">@i</a>
-                </li>
-            }
-
-            <!-- Next button, only shown if the current page is less than the total number of pages -->
-            @if (paginationRequest?.PageNumber < totalPages)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="@Url.Action("All", "Lesson", new { pageNumber = paginationRequest.PageNumber + 1, pageSize = paginationRequest.PageSize })">Next</a>
-                </li>
-            }
-        </ul>
-    </div>
-</div>
+        <!-- Next button -->
+        <li class="page-item @(Model.PageNumber >= totalPages ? "disabled" : "")">
+            <a class="page-link" href="@Url.Action("All", new { pageNumber = Model.PageNumber + 1, pageSize = Model.PageSize })" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

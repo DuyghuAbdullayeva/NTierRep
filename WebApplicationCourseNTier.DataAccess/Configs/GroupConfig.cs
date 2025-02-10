@@ -9,9 +9,10 @@ namespace WebApplicationCourseNTier.DataAccess.Configs
     {
         public override void Configure(EntityTypeBuilder<Group> builder)
         {
-          
+
             builder.Property(g => g.Name).IsRequired().HasMaxLength(50);
 
+            builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.HasOne(g => g.Teacher)
                 .WithMany(t => t.Groups)
@@ -26,9 +27,9 @@ namespace WebApplicationCourseNTier.DataAccess.Configs
             builder.HasMany(g => g.Lessons)
                 .WithOne(l => l.Group)
                 .HasForeignKey(l => l.GroupId);
-            base.Configure(builder); 
+            base.Configure(builder);
 
-            
+
         }
     }
 }

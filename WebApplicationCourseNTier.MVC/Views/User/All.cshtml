@@ -1,0 +1,27 @@
+﻿
+<h2>User List</h2>
+<a asp-action="Create" class="btn btn-primary">Create New User</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model is not null)
+        {
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>1</td>
+                    <td>Adham</td>
+                    <td>Polad</td>
+                </tr>
+            }
+        }
+        
+    </tbody>
+</table>
