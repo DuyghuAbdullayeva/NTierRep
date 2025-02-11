@@ -2,13 +2,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using WebApplicationCourseNTier.API.Configs;
-
+using WebApplicationCourseNTier.Business.Validators;
 using WebApplicationCourseNTier.Business.Extensions;
 using WebApplicationCourseNTier.DataAccess.Extensions;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FluentValidation.AspNetCore;
 
 namespace WebApplicationCourseNTier
 {
@@ -17,9 +18,10 @@ namespace WebApplicationCourseNTier
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
 
-            // Register controllers
+            builder.Services.AddControllers()
+               .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<RegisterUserDtoValidator>());
+            // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddControllers(opts => opts.Conventions
                                              .Add(new RouteTokenTransformerConvention(new ToKebabParameterTransformer())));
